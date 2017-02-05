@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css'/>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script src="https://code.angularjs.org/1.2.9/angular.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./stylesheets/style.css">
+<script src="./javascripts/myApp.js" type="text/javascript" charset="utf-8"></script>
+<body ng-app="myApp">
+<div class="container" ng-controller="myCtrl">
+    <div class="main">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#home" data-toggle="tab">User Entry</a></li>
+            <li><a href="#searchTab" data-toggle="tab">User search</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane active in" id="home">
+                <form id="tab">
+                    <div class="row control-group">
+                        <label class="col-sm-2 control-label">First Name<span style="color:red;"> *</span></label>
+                        <div class="col-sm-10 controls">
+                            <input class="form-control"  ng-blur="validate($event)" ng-model="firstname" id="first-name"  type="text" placeholder="first name"
+                                   class="input-xlarge">
+                            <span id="validSign1"></span>
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <label class="col-sm-2 control-label">Last Name<span style="color:red;"> *</span></label>
+                        <div class="col-sm-10 controls">
+                            <input  class="form-control" ng-blur="validate($event)" ng-model="lastname" id="last-name" type="text" placeholder="last name"
+                                    class="input-xlarge">
+                            <span id="validSign2"></span>
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <label class="col-sm-2 control-label" for="selectGender">Gender<span style="color:red;"> *</span></label>
+                        <div class="col-sm-10 controls">
+                            <select class="form-control"  ng-blur="validate($event)"  ng-model="gender" id="selectGender" name="selectGender" class="input-xlarge">
+                                <option>Select</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                            <span ></span>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <label class="col-sm-2 control-label">Date of birth</label>
+                        <div class="col-sm-10 controls">
+                            <input type="text" id="departing" ng-change="getAge()"  ng-model="DOB">
+                            <span id="validSign3"></span>
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <label class="col-sm-2 control-label">Age<span style="color:red;"> *</span></label>
+                        <div class="col-sm-10 controls">
+                            <input class="form-control"  ng-blur="validate($event)" ng-model="age" id="userAge" type="text" placeholder="Age"
+                                   class="input-xlarge">
+                            <span ></span>
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <label class="col-sm-2 control-label">Comments<span style="color:red;"> *</span></label>
+                        <div class="col-sm-10 controls">
+		            <textarea class="form-control"  ng-blur="validate($event)"  ng-model="comments" id="userCmnts" rows="5" class="input-xlarge">
+
+		            </textarea>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary" ng-click="newEntry()" >Submit</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="tab-pane fade" id="searchTab">
+                <form id="tab2">
+                    <div class="row control-group">
+
+                        <div class="col-sm-9 controls">
+                            <input class="form-control" id="search" ng-model="searchItem" type="text" placeholder="search here.."
+                                   class="input-xlarge">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <p></p>
+                            <div class="table-responsive"><table>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Date of birth</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Comments</th>
+                                <tr ng-repeat="x in searchData | filter: searchItem">
+                                    <td>{{ x.firstname }}</td>
+                                    <td>{{ x.lastname }}</td>
+                                    <td>{{ x.DOB }}</td>
+                                    <td>{{ x.age }}</td>
+                                    <td>{{ x.gender }}</td>
+                                    <td>{{ x.comments }}</td>
+                                </tr>
+                            </table></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
